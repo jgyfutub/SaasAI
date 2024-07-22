@@ -12,14 +12,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <ClerkProvider>
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+        <title>Next.js 13 with Clerk</title>
+      </head>
+      <ClerkProvider>
+        <body>{children}</body>
+      </ClerkProvider>
     </html>
-    </ClerkProvider>
   );
 }

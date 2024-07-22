@@ -3,10 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { UserButton } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
+import { LinkProps } from "next/link";
+import { LogIn } from "lucide-react";
+import FileUpload from "@/components/FileUpload";
 
 export default async function Home() {
   const {userId}=await auth()
-  const isAuth= !!userId
+  const isAuth= !userId
   return (
     <div className="w-screen min-h-screen bg-gradient-to-r from-rose-100 to-teal-100">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -19,7 +22,19 @@ export default async function Home() {
           {isAuth &&
           <Button>Go to Chats</Button>}
         </div>
-        <p>Join million of students</p>
+        <p className="max-w-xl mt-1 text-lg text-slate-800"> Join million of students,researchers and professionlas blah blah blah</p>
+        <div className="w-full mt-4">
+          {isAuth ? (<FileUpload/>):(
+            // <LinkProps/>
+            <div>
+          <Button>
+            Login to get started
+            <LogIn className="w-4 h-4 ml-2"/>
+          </Button>
+          </div>
+          // </Link>
+          )}
+        </div>
       </div>
       </div>
     </div>)
