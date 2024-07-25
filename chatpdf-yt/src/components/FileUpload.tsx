@@ -6,11 +6,12 @@ import { uploadToS3 } from "../app/lib/db/s3";
 import { useMutation } from "@tanstack/react-query";
 import axios from 'axios'
 import { toast } from "react-hot-toast";
+import { POST } from "@/app/api/create-chat/route";
 const FileUpload=()=>{
     const [upload,isupload]=useState(false)
     const {mutate,isPending}=useMutation({
         mutationFn:async({file_key,file_name}:{file_key:string;file_name:string})=>{
-            const response=await axios.post('@/api/create-chat',{file_key,file_name})
+            const response=await axios.post(POST(file_key,file_name),{file_key,file_name})
             return response.data
         }
     })
